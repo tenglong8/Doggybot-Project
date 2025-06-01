@@ -69,11 +69,11 @@ def generate_launch_description():
             '/world/wyman/model/doggy/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
             '/sonar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
             '/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
-            '/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist',
+            #'/diff_drive_controller/cmd_vel_unstamped@geometry_msgs/msg/Twist]ignition.msgs.Twist',
         ],
        remappings=[
                    ('/world/wyman/model/doggy/joint_state', '/joint_states'),
-                 #  ('/diff_drive_controller/cmd_vel','/cmd_vel'),
+                   #('/diff_drive_controller/cmd_vel_unstamped','/cmd_vel'),
                     ],
         output='screen'
     ) 
@@ -101,13 +101,14 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["diff_drive_controller", "--controller-manager", "/controller_manager"],
+        parameters=[robot_controller_config],
         remappings=[
-            ("/robot_description", "/robot_description"),
-           # ("/diff_drive_controller/cmd_vel", "/cmd_vel"),
+            ("~/robot_description", "/robot_description"),
+            ("~/cmd_vel_unstamped", "/cmd_vel"),
            
         ],
     )
-    
+   
     return LaunchDescription([  
         #doggy_description,
         robot_state_publisher_node,
@@ -121,5 +122,6 @@ def generate_launch_description():
         rviz_node,
         #control_node,
         joint_state_controller,
-        diffdrive_controller
+        diffdrive_controller,
+        
     ])
