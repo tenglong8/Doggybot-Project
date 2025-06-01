@@ -53,7 +53,7 @@ def generate_launch_description():
   )
 
     # open in rviz interface
-    rviz_file = [doggybot_pkg , "/launch/edumip.rviz"]
+    rviz_file = [doggybot_pkg , "/rviz/doggy.rviz"]
     rviz_node = Node(
         package="rviz2",
         executable="rviz2",
@@ -69,11 +69,12 @@ def generate_launch_description():
             '/world/wyman/model/doggy/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
             '/sonar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
             '/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
-            #'/diff_drive_controller/cmd_vel_unstamped@geometry_msgs/msg/Twist]ignition.msgs.Twist',
+            '/image@sensor_msgs/msg/Image[ignition.msgs.Image',
+            '/cmd_vel@geometry_msgs/msg/Twist[ignition.msgs.Twist',
         ],
        remappings=[
                    ('/world/wyman/model/doggy/joint_state', '/joint_states'),
-                   #('/diff_drive_controller/cmd_vel_unstamped','/cmd_vel'),
+                   ('/cmd_vel','/diff_drive_controller/cmd_vel_unstamped'),
                     ],
         output='screen'
     ) 

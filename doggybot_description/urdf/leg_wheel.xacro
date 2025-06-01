@@ -55,20 +55,38 @@
        <visual>
 	<origin xyz="0 0 0" rpy="${3.1415/2} 0 0"/>
 	<geometry>
-	  <cylinder length="0.05" radius="0.2"/>
+	  <cylinder length="0.1" radius="0.2"/>
 	</geometry>
-	<material name="blue">
+	<material name="wheel_red">
 	  <color rgba="${255/255} ${0/255} ${0/255}  0.8"/>
 	</material>
       </visual>
       <collision>
 	<origin xyz="0 0 0" rpy="${3.1415/2} 0 0"/>
 	<geometry>
-	  <cylinder length="0.05" radius="0.2"/>
+	  <cylinder length="0.0001" radius="0.2"/>
 	</geometry>
 	<material name="blue">
 	  <color rgba="0.0 1.0 0.0 0.5"/>
 	</material>
+	<surface>
+    <friction>
+      <ode>
+        <mu>5.0</mu>       <!-- strong forward friction -->
+        <mu2>2.0</mu2>     <!-- slightly less lateral grip -->
+      </ode>
+    </friction>
+    <bounce>
+      <restitution_coefficient>0.05</restitution_coefficient>
+      <threshold>0.1</threshold>
+    </bounce>
+    <contact>
+      <soft_cfm>1e-5</soft_cfm>   <!-- slight softness -->
+      <soft_erp>0.6</soft_erp>
+      <kp>50000</kp>             <!-- stiffer than soft material -->
+      <kd>5.0</kd>
+    </contact>
+  </surface>
       </collision>
      
      </link>  
