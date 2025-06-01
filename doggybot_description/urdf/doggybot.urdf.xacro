@@ -1,0 +1,16 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="DoggyBot">
+
+  <xacro:include filename="$(find doggybot_description)/urdf/body.xacro" />
+  <xacro:include filename="$(find doggybot_description)/urdf/controller.xacro"/>
+  <xacro:doggybot_control use_simulation="true" use_fake_hardware="false"/>
+  <xacro:base/>
+  <xacro:arg name="sim_controllers" default=""/>
+
+   <gazebo>
+    <plugin filename="libign_ros2_control-system.so" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+      <parameters>$(arg sim_controllers)</parameters>
+      <controller_manager_node_name>controller_manager</controller_manager_node_name>
+    </plugin>
+  </gazebo>
+
+</robot>
