@@ -13,8 +13,8 @@ diff_drive_controller:
     left_wheel_names: ["back_left_Wheel","front_left_Wheel"]
     right_wheel_names: ["back_right_Wheel","front_right_Wheel"]
 
-    wheel_separation: 0.233
-    wheel_radius: 0.03575
+    wheel_separation: 0.6
+    wheel_radius: 0.1
 
       # Multiplier applied to the wheel separation parameter.
       # This is used to account for a difference between the robot model and a real robot.
@@ -27,7 +27,7 @@ diff_drive_controller:
 
     publish_rate: 62.0
     odom_frame_id: odom
-    base_frame_id: base_link
+    base_frame_id: body_link
     pose_covariance_diagonal : [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
     twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
 
@@ -36,7 +36,7 @@ diff_drive_controller:
     wheels_per_side: 2 
     cmd_vel_timeout: 0.5
     use_stamped_vel: false
-
+    
       # Preserve turning radius when limiting speed/acceleration/jerk
     preserve_turning_radius: true
 
@@ -55,9 +55,9 @@ diff_drive_controller:
     linear.x.has_jerk_limits: false
       # This is max if system is safety_override "full"
       # motion_control_node will bound this to 0.306 if safety enabled (as is by default)
-    linear.x.max_velocity: 0.46
-    linear.x.min_velocity: -0.46
-    linear.x.max_acceleration: 0.9
+    linear.x.max_velocity: 2.46
+    linear.x.min_velocity: -2.46
+    linear.x.max_acceleration: 1.9
       # Not using jerk limits yet
       # linear.x.max_jerk: 0.0
       # linear.x.min_jerk: 0.0
@@ -65,8 +65,8 @@ diff_drive_controller:
     angular.z.has_velocity_limits: true
     angular.z.has_acceleration_limits: true
     angular.z.has_jerk_limits: false
-    angular.z.max_velocity: 1.9
-    angular.z.min_velocity: -1.9
+    angular.z.max_velocity: 2.9
+    angular.z.min_velocity: -2.9
       # Using 0.9 linear for each wheel, assuming one wheel accel to .9
       # and other to -.9 with wheelbase leads to 7.725 rad/s^2
     angular.z.max_acceleration: 7.725

@@ -48,4 +48,65 @@
     </gazebo>
   </xacro:macro>
 
+
+  <xacro:macro name="lidar_sensor" params="*origin">
+     <link name="lidar_link">
+          <visual>
+                 <origin xyz="0 0 0" rpy="${3.1415/2} 0 ${3.1415/2}"/>
+           
+                 <material name="Red">
+                         <color rgba="1.0 0.0 0.0 0.5"/>
+                 </material>
+           </visual>
+           <collision>
+                 <origin xyz="0 0 0" rpy="${3.1415/2} 0 ${3.1415/2}"/>
+             
+                  <material name="Red">
+                         <color rgba="1.0 0.0 0.0 0.5"/>
+                  </material>
+           </collision>
+          
+     </link>
+     
+     <joint name="lidar_joint" type="fixed">
+       <parent link="head_link"/>
+       <child link="lidar_link"/>
+       <xacro:insert_block name="origin" />
+     </joint>
+     
+    <gazebo reference="lidar_link" >
+      
+      <sensor name="lidar" type="gpu_lidar">
+        
+        <topic> lidar_scan </topic>
+        <update_rate>100</update_rate>
+        <ignition_frame_id>lidar_link</ignition_frame_id>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>300</samples>
+              <resolution>1</resolution>
+              <min_angle>${-3.1415/2}</min_angle>
+              <max_angle>${3.1415/2}</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>30</samples>
+              <resolution>1</resolution>
+              <min_angle>-${3.1415/2-1}</min_angle>
+              <max_angle>0.2618</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.02</min>
+            <max>30.0</max>
+            <resolution>100</resolution>
+          </range>
+        </ray>
+        
+        <alwaysOn>1</alwaysOn>
+        <visualize>true</visualize>
+      </sensor>
+    </gazebo>
+    
+  </xacro:macro>
 </robot>

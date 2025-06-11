@@ -67,7 +67,7 @@ def generate_launch_description():
         executable='parameter_bridge',
         arguments=[
             '/world/wyman/model/doggy/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
-            '/sonar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
+            '/lidar_scan/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
             '/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
             '/image@sensor_msgs/msg/Image[ignition.msgs.Image',
             '/cmd_vel@geometry_msgs/msg/Twist[ignition.msgs.Twist',

@@ -40,8 +40,8 @@
      <joint name="${prefix}_Wheel" type="continuous">
       <parent link="${prefix}_leg"/>
       <child  link="${prefix}_wheel"/>
-      <origin xyz="0.0 0.2 0" rpy="${-3.1415/2} 0 ${-3.1415/2}"/>
-      <axis xyz="0 1 0"/>
+      <origin xyz="0.0 0.2 0" rpy="0 ${3.1415/2} 0"/>
+      <axis xyz="1 0 0"/>
     </joint>
   </xacro:macro>
   
@@ -53,7 +53,7 @@
           <inertia ixx="1.75e-5" ixy="0" ixz="0" iyy="1.75e-5" iyz="0" izz="1.75e-5"/>
        </inertial>
        <visual>
-	<origin xyz="0 0 0" rpy="${3.1415/2} 0 0"/>
+	<origin xyz="0 0 0" rpy="${3.1415/2} 0 ${3.1415/2}"/>
 	<geometry>
 	  <cylinder length="0.1" radius="0.2"/>
 	</geometry>
@@ -62,9 +62,9 @@
 	</material>
       </visual>
       <collision>
-	<origin xyz="0 0 0" rpy="${3.1415/2} 0 0"/>
+	<origin xyz="0 0 0" rpy="${3.1415/2} 0 ${3.1415/2}"/>
 	<geometry>
-	  <cylinder length="0.0001" radius="0.2"/>
+	  <sphere radius="0.2"/>
 	</geometry>
 	<material name="blue">
 	  <color rgba="0.0 1.0 0.0 0.5"/>
@@ -72,8 +72,8 @@
 	<surface>
     <friction>
       <ode>
-        <mu>5.0</mu>       <!-- strong forward friction -->
-        <mu2>2.0</mu2>     <!-- slightly less lateral grip -->
+        <mu>1.0</mu>       <!-- strong forward friction -->
+        <mu2>0.1</mu2>     <!-- slightly less lateral grip -->
       </ode>
     </friction>
     <bounce>

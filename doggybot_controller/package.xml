@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>doggybot_gazebo</name>
+  <name>doggybot_controller</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
   <maintainer email="teng@todo.todo">teng</maintainer>
@@ -9,18 +9,11 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>urdf</depend>
-  <depend>xacro</depend>
-  <depend>robot_state_publisher</depend>
-  <depend>launch_ros</depend>
-  <depend>ros_gz_sim</depend>
-  <depend>rviz2</depend>
   <depend>rclcpp</depend>
-  <depend>doggybot_description</depend>
-  <depend>tf2_ros</depend>
-  <depend>tf2_geometry_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>pcl_conversions</depend>
 
-  
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
