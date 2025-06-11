@@ -11,6 +11,7 @@ namespace rsp{
     rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr ros_subscriber;
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr ros_publisher;
   public:
+    std::string control_mode;
     subscriber( const std::string& name );
     void callback( const sensor_msgs::msg::PointCloud2::SharedPtr msg );
 

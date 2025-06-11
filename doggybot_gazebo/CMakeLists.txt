@@ -16,11 +16,11 @@ find_package(rclcpp REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(doggybot_description REQUIRED)
-
+find_package(doggybot_controller REQUIRED)
 
 include_directories( include )
 add_library( broadcaster SHARED src/tf_broadcast.cpp )
-ament_target_dependencies( broadcaster rclcpp geometry_msgs tf2_ros tf2_geometry_msgs geometry_msgs)
+ament_target_dependencies( broadcaster rclcpp geometry_msgs tf2_ros tf2_geometry_msgs geometry_msgs doggybot_controller)
 
 
 install( DIRECTORY include/ DESTINATION include)

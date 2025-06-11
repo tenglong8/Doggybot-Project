@@ -20,12 +20,12 @@ namespace rsp{
       if (!std::isfinite(pt.x) ||
           !std::isfinite(pt.y) ||
           !std::isfinite(pt.z) ||
-          pt.z<-0.6
+          pt.z<-0.3
           )
       {
         continue;  // skip NaNs
       }
-      if(pt.z>-0.6)
+      if(pt.z>-0.3)
        {
         geometry_msgs::msg::Twist cmd_vel_msg;
         //pp::PPcontroller(cmd_vel_msg, pt.x, pt.y);

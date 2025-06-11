@@ -92,7 +92,7 @@
             <vertical>
               <samples>30</samples>
               <resolution>1</resolution>
-              <min_angle>-${3.1415/2-1}</min_angle>
+              <min_angle>-${3.1415/2}</min_angle>
               <max_angle>0.2618</max_angle>
             </vertical>
           </scan>
