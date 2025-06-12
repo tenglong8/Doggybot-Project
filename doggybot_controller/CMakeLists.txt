@@ -13,10 +13,14 @@ find_package(sensor_msgs REQUIRED)
 find_package(pcl_conversions REQUIRED)
 
 include_directories( include )
-add_library( controller SHARED src/controller.cpp)
+add_library( controller SHARED src/controller_node.cpp 
+                               src/PP.cpp
+                               src/PID.cpp)
 ament_target_dependencies( controller rclcpp geometry_msgs sensor_msgs pcl_conversions)
 
-add_executable( control src/controller.cpp )
+add_executable( control src/controller_node.cpp 
+                        src/PP.cpp
+                        src/PID.cpp)
 target_link_libraries( control controller )
 ament_target_dependencies( control rclcpp )
 

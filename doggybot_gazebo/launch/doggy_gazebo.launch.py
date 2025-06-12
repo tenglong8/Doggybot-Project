@@ -119,6 +119,9 @@ def generate_launch_description():
         executable="control",
         name="controller",
         output="screen",
+        parameters=[
+        {"control_mode" : control_mode}
+        ]
          )
    
     return LaunchDescription([  
