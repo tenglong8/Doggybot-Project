@@ -9,7 +9,7 @@ from launch.actions import DeclareLaunchArgument
 def generate_launch_description():
     control_mode = LaunchConfiguration('control_mode')
     control_mode_arg = DeclareLaunchArgument('control_mode', default_value='PP', 
-    choices =['PP', 'PID'],
+    choices =['PP', 'PID', 'MPC'],
     description='Select suitable control mode for the robot.')
     
     doggy_description_pkg = FindPackageShare("doggybot_description")

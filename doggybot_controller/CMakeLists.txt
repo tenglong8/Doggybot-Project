@@ -11,17 +11,32 @@ find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(pcl_conversions REQUIRED)
+find_path(CASADI_INCLUDE_DIR
+  NAMES casadi/casadi.hpp
+  HINTS /usr/local/include /usr/include
+)
+find_library(CASADI_LIBRARY
+  NAMES casadi
+  HINTS /usr/local/lib /usr/lib
+)
+if(NOT CASADI_INCLUDE_DIR OR NOT CASADI_LIBRARY)
+  message(FATAL_ERROR "Could not find CasADi (casadi.hpp in include and libcasadi.so in lib)")
+endif()
+
+include_directories(${CASADI_INCLUDE_DIR})
 
 include_directories( include )
 add_library( controller SHARED src/controller_node.cpp 
                                src/PP.cpp
-                               src/PID.cpp)
+                               src/PID.cpp
+                               src/MPC.cpp)
 ament_target_dependencies( controller rclcpp geometry_msgs sensor_msgs pcl_conversions)
 
 add_executable( control src/controller_node.cpp 
                         src/PP.cpp
-                        src/PID.cpp)
-target_link_libraries( control controller )
+                        src/PID.cpp
+                        src/MPC.cpp)
+target_link_libraries( control controller ${CASADI_LIBRARY} )
 ament_target_dependencies( control rclcpp )
 
 install( DIRECTORY include/ DESTINATION include)

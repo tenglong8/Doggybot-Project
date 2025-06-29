@@ -1,6 +1,9 @@
 #include <doggybot_controller/controller_node.hpp>
 #include <doggybot_controller/PP.hpp>
 #include <doggybot_controller/PID.hpp>
+#include <doggybot_controller/MPC.hpp>
+#include <iostream>
+
 namespace controller_node{
 
   controller::controller( const std::string& name ):
@@ -56,12 +59,23 @@ namespace controller_node{
     }
    }
    void controller::controller_mode(geometry_msgs::msg::Twist &twist, double Px, double Py, double past_Px, double past_Py, double deltaT){
-      if( ctrl_mode == "PP" ){
+      if(ctrl_mode == "MPC"){
+        std::vector<double> state(3, 0);
+        std::vector<double> target(3, 0);
+        target[0] = 0;
+        target[1] = 0;
+        state[0] = -Px;
+        state[2] = -Py;
+        mpc ctrl;
+        ctrl.MPCcontroller(twist, state, target, deltaT);
+      }
+      else if( ctrl_mode == "PP" ){
         pp ctrl;
         ctrl.PPcontroller(twist, Px, Py);
        }
       else if( ctrl_mode == "PID" ){
        pid ctrl;
+       std::cout<<deltaT<<std::endl;
        ctrl.PIDcontroller(twist, Px, Py, past_Px, past_Py, deltaT);
       }
      }
