@@ -50,7 +50,7 @@ void mpc::MPCcontroller(geometry_msgs::msg::Twist &twist, std::vector<double> st
    
    twist.linear.x = cmd[0];
    twist.angular.z = cmd[1];
-   //std::cout<<cmd[0]<<" "<<cmd[1]<<"//////"<<std::endl;
+
     
 }
 
@@ -65,7 +65,7 @@ std::vector<double> mpc::solve(const std::vector<double> x0){
   std::vector<double> cmd;
   casadi::Matrix<double> u0 = solution.value(u)(casadi::Slice(), 0);
   cmd = u0.get_elements();
-  std::cout<<cmd[0]<<" "<<cmd[1]<<"//////"<<std::endl;
+
   x_init = casadi::DM::repmat(solution.value(x)(casadi::Slice(), 0), 1, horizon+1);
   u_init = solution.value(u)(casadi::Slice(), casadi::Slice());
   return cmd;
