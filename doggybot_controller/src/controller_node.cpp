@@ -64,8 +64,8 @@ namespace controller_node{
         std::vector<double> target(3, 0);
         target[0] = 0;
         target[1] = 0;
-        state[0] = -Px;
-        state[2] = -Py;
+        state[0] = -sqrt(Px*Px + Py*Py);
+        state[2] = -atan(Py/Px);
         mpc ctrl;
         ctrl.MPCcontroller(twist, state, target, deltaT);
       }
@@ -75,7 +75,6 @@ namespace controller_node{
        }
       else if( ctrl_mode == "PID" ){
        pid ctrl;
-       std::cout<<deltaT<<std::endl;
        ctrl.PIDcontroller(twist, Px, Py, past_Px, past_Py, deltaT);
       }
      }

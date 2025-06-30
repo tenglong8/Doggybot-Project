@@ -2,6 +2,11 @@
 #include <Eigen/Dense>
 #include <casadi/casadi.hpp>
 
+#define MAX_LINEAR_VELOCITY     1   // m/s
+#define MAX_ANGULAR_VELOCITY    1   // rad/s
+#define MAX_DELTA_VELOCITY    0.5   // m/s
+#define MAX_DELTA_OMEGA    M_PI/2.0   // rad/s
+
  class mpc{
   public:
    void MPCcontroller(geometry_msgs::msg::Twist &twist, std::vector<double> state, std::vector<double> target, double deltaT);
