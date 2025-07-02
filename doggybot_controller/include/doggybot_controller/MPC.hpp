@@ -2,8 +2,8 @@
 #include <Eigen/Dense>
 #include <casadi/casadi.hpp>
 
-#define MAX_LINEAR_VELOCITY     1   // m/s
-#define MAX_ANGULAR_VELOCITY    1   // rad/s
+#define MAX_LINEAR_VELOCITY     0.7   // m/s
+#define MAX_ANGULAR_VELOCITY    0.5   // rad/s
 #define MAX_DELTA_VELOCITY    0.5   // m/s
 #define MAX_DELTA_OMEGA    M_PI/2.0   // rad/s
 
@@ -20,6 +20,7 @@
    casadi::Dict solver_options;
    casadi::MX Q;
    casadi::MX R;
+   casadi::MX Qf;
    casadi::MX x_tar;
    casadi::MX x;
    casadi::DM x_init;
@@ -31,8 +32,5 @@
    casadi::MX DiffModel(const casadi::MX& x, const casadi::MX& u, const double dt);
    
    
-   //vector<int> DiffModel(vector<int> state, vector<int> input);
-   //double mpc::cost(Eigen::Matrix<double, 3, 3> Q, Eigen::Matrix<double, 2, 2> R,
-    //   Eigen::Matrix<double, 3, 1> state, Eigen::Matrix<double, 2, 1> input );
  };
  

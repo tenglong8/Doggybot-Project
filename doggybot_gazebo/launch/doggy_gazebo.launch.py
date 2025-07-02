@@ -75,10 +75,12 @@ def generate_launch_description():
             '/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
             '/image@sensor_msgs/msg/Image[ignition.msgs.Image',
             '/cmd_vel@geometry_msgs/msg/Twist[ignition.msgs.Twist',
+            '/world/wyman/dynamic_pose/info@geometry_msgs/msg/PoseArray[ignition.msgs.Pose_V',
         ],
        remappings=[
                    ('/world/wyman/model/doggy/joint_state', '/joint_states'),
                    ('/cmd_vel','/diff_drive_controller/cmd_vel_unstamped'),
+                   ('/world/wyman/dynamic_pose/info','/pose/info'),
                     ],
         output='screen'
     ) 
@@ -123,10 +125,20 @@ def generate_launch_description():
         {"control_mode" : control_mode}
         ]
          )
-   
+    broadcaster = Node(
+        package="doggybot_gazebo",
+        executable="tf_node",
+        name="broadcast",
+        output="screen",
+        parameters=[
+            { "use_sim_time": True },
+            
+        ],
+        )
     return LaunchDescription([  
         #doggy_description,
         control_mode_arg,
+        broadcaster,
         robot_state_publisher_node,
         spawn_robot,      
         SetEnvironmentVariable(

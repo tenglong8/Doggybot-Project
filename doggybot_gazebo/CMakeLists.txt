@@ -22,12 +22,19 @@ include_directories( include )
 add_library( broadcaster SHARED src/tf_broadcast.cpp )
 ament_target_dependencies( broadcaster rclcpp geometry_msgs tf2_ros tf2_geometry_msgs geometry_msgs doggybot_controller)
 
+add_executable( tf_node src/tf_broadcast.cpp )
+target_link_libraries( tf_node broadcaster)
+ament_target_dependencies( tf_node rclcpp tf2_ros tf2_geometry_msgs)
+
+install( TARGETS broadcaster LIBRARY DESTINATION lib)
+install( TARGETS tf_node DESTINATION lib/${PROJECT_NAME} )
 
 install( DIRECTORY include/ DESTINATION include)
 install( DIRECTORY launch DESTINATION share/${PROJECT_NAME} )
 install( DIRECTORY worlds DESTINATION share/${PROJECT_NAME} )
 install( DIRECTORY config DESTINATION share/${PROJECT_NAME} )
 install( DIRECTORY rviz DESTINATION share/${PROJECT_NAME} )
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

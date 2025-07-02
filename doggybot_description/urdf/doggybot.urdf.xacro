@@ -12,5 +12,5 @@
       <controller_manager_node_name>controller_manager</controller_manager_node_name>
     </plugin>
   </gazebo>
-
+   
 </robot>

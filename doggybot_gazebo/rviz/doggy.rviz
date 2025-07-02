@@ -192,35 +192,38 @@ Visualization Manager:
           Value: true
         tail_link:
           Value: true
+        world:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: false
       Tree:
-        body_link:
-          base_link:
-            back_left_leg:
-              back_left_wheel:
+        world:
+          body_link:
+            base_link:
+              back_left_leg:
+                back_left_wheel:
+                  {}
+              back_right_leg:
+                back_right_wheel:
+                  {}
+              front_left_leg:
+                front_left_wheel:
+                  {}
+              front_right_leg:
+                front_right_wheel:
+                  {}
+              head_link:
+                lidar_link:
+                  {}
+                rgb_camera:
+                  {}
+              tail_link:
                 {}
-            back_right_leg:
-              back_right_wheel:
-                {}
-            front_left_leg:
-              front_left_wheel:
-                {}
-            front_right_leg:
-              front_right_wheel:
-                {}
-            head_link:
-              lidar_link:
-                {}
-              rgb_camera:
-                {}
-            tail_link:
-              {}
-        odom:
-          {}
+          odom:
+            {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -260,7 +263,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: odom
+    Fixed Frame: world
     Frame Rate: 30
   Name: root
   Tools:
@@ -303,25 +306,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 17.905176162719727
+      Distance: 27.464927673339844
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.45287734270095825
-        Y: 0.7609568238258362
-        Z: 0.13537435233592987
+        X: 5.646308898925781
+        Y: 4.086051940917969
+        Z: -0.44982266426086426
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.34039849042892456
+      Pitch: 1.0953973531723022
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.563558101654053
+      Yaw: 2.423535108566284
     Saved: ~
 Window Geometry:
   Displays:
