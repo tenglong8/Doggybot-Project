@@ -31,6 +31,10 @@ namespace controller_node{
     declare_parameter("control_mode", "");
     
     get_parameter("control_mode", ctrl_mode);
+    
+    if      (ctrl_mode == "MPC") mode = Mode::MPC;
+    else if (ctrl_mode == "PP")  mode = Mode::PP;
+    else if (ctrl_mode == "PID") mode = Mode::PID;
   }
   
   void controller::callback( const sensor_msgs::msg::PointCloud2::SharedPtr msg ){ 
@@ -79,7 +83,8 @@ namespace controller_node{
     geometry_msgs::msg::Twist goal2robot;
     goal2robot.linear.x = cos(robot_pos.angular.z)*(goal_pos.linear.x - robot_pos.linear.x) + sin(robot_pos.angular.z)*(goal_pos.linear.y - robot_pos.linear.y);
     goal2robot.linear.y = cos(robot_pos.angular.z)*(goal_pos.linear.y - robot_pos.linear.y) + sin(robot_pos.angular.z)*(robot_pos.linear.x - goal_pos.linear.x);
-    std::cout<<"/////"<< goal2robot.linear.x<<" "<< goal2robot.linear.y<<" "<<std::endl;
+   // std::cout<<"/////"<< goal2robot.linear.x<<" "<< goal2robot.linear.y<<" "<<std::endl;
+    
     if(sqrt(goal2robot.linear.x*goal2robot.linear.x + goal2robot.linear.y*goal2robot.linear.y)>0.3)
  
     {
@@ -95,7 +100,9 @@ namespace controller_node{
    
    }
    void controller::controller_mode(geometry_msgs::msg::Twist &twist, double Px, double Py, double past_Px, double past_Py, double deltaT){
-      if(ctrl_mode == "MPC"){
+      switch(mode){
+      case Mode::MPC:
+      {
         std::vector<double> state(3, 0);
         std::vector<double> target(3, 0);
 
@@ -105,19 +112,26 @@ namespace controller_node{
         target[0] = Px;
         target[1] = Py;
         target[2] = 0;
-        //state[2] = -atan(Py/Px);
+        
         mpc ctrl;
         ctrl.MPCcontroller(twist, state, target, deltaT);
+        break;
       }
-      else if( ctrl_mode == "PP" ){
+      case Mode::PP:
+      {
+      
         pp ctrl;
-        ctrl.PPcontroller(twist, Px, Py);
+        ctrl.PPcontroller(twist, Px, atan2(Py,Px));
+        break;
        }
-      else if( ctrl_mode == "PID" ){
+      case Mode::PID:
+      {
        pid ctrl;
        ctrl.PIDcontroller(twist, Px, Py, past_Px, past_Py, deltaT);
+       break;
       }
      }
+    }
      
      void controller::goal_pose_callback( const geometry_msgs::msg::PoseStamped::SharedPtr msg ){
      double qx, qy, qz, qw;

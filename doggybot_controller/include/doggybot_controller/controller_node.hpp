@@ -9,12 +9,15 @@
 #include <pcl/common/centroid.h> 
 #include <chrono>
 
+enum class Mode { MPC, PP, PID };
+
 namespace controller_node{
  class controller : public rclcpp::Node{
   private:
     double past_x, past_y;
     std::string ctrl_mode;
     std::chrono::steady_clock::time_point start_time;
+    Mode mode; 
     
     rclcpp::CallbackGroup::SharedPtr group1;
     rclcpp::CallbackGroup::SharedPtr group2;
