@@ -112,9 +112,14 @@ namespace controller_node{
         target[0] = Px;
         target[1] = Py;
         target[2] = 0;
-        
+        if(target[0]>0.0){
         mpc ctrl;
         ctrl.MPCcontroller(twist, state, target, deltaT);
+        }
+        else{
+            twist.linear.x = 0;
+            twist.angular.z = 0.2;
+        }
         break;
       }
       case Mode::PP:

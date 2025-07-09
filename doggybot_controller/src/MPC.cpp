@@ -49,9 +49,9 @@ void mpc::MPCcontroller(geometry_msgs::msg::Twist &twist, std::vector<double> st
    solver_options["ipopt.acceptable_obj_change_tol"] = 1e-6;
    opti.solver("ipopt", solver_options);
                            
-   opti.set_value(Q, casadi::DM::diag(casadi::DM::vertcat({10.0, 10.0, 1.0})));               
+   opti.set_value(Q, casadi::DM::diag(casadi::DM::vertcat({10.0, 80.0, 1.0})));               
    opti.set_value(R, casadi::DM::diag(casadi::DM::vertcat({1.2, 0.25})));
-   opti.set_value(Qf, casadi::DM::diag(casadi::DM::vertcat({30, 40, 1.0}))); 
+   opti.set_value(Qf, casadi::DM::diag(casadi::DM::vertcat({30, 80, 1.0}))); 
    opti.set_value(x_ref, casadi::DM::repmat(target, 1, horizon+1));
    
    x_init = casadi::DM::repmat({0.0, 0.0, 0.0}, 1, horizon+1);

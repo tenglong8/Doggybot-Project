@@ -2,7 +2,7 @@
 #include <Eigen/Dense>
 #include <casadi/casadi.hpp>
 
-#define MAX_LINEAR_VELOCITY     0.7   // m/s
+#define MAX_LINEAR_VELOCITY     0.5   // m/s
 #define MAX_ANGULAR_VELOCITY    0.5   // rad/s
 #define MAX_DELTA_VELOCITY    0.5   // m/s
 #define MAX_DELTA_OMEGA    M_PI/2.0   // rad/s
